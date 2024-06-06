@@ -107,3 +107,5 @@ class Service {
 }
 
 export const S3Service = new Service();
+
+console.log('test');
