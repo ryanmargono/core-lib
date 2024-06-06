@@ -1,0 +1,48 @@
+{
+  "name": "@ryanmargono/core-lib",
+  "version": "0.0.0",
+  "type": "module",
+  "publishConfig": {
+    "@ryanmargono:registry": "https://npm.pkg.github.com"
+  },
+  "scripts": {
+    "test": "sst bind vitest",
+    "typecheck": "tsc -noEmit"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.137",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/node": "^20.12.7",
+    "sst": "^2.41.5",
+    "vitest": "^1.5.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@apollo/server-plugin-landing-page-graphql-playground": "^4.0.1",
+    "@as-integrations/aws-lambda": "^3.1.0",
+    "@aws-sdk/client-s3": "^3.569.0",
+    "@aws-sdk/s3-request-presigner": "^3.569.0",
+    "@shiftcoders/dynamo-easy": "^7.1.1",
+    "@tanstack/react-query": "^5.32.1",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "antd": "^5.17.0",
+    "aws-lambda": "^1.0.6",
+    "aws-sdk": "^2.1018.0",
+    "builder-pattern": "^2.2.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "google-auth-library": "^9.9.0",
+    "graphql-request": "^6.1.0",
+    "install": "^0.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.20.0",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^1.1.1",
+    "typed-graphqlify": "^3.1.6",
+    "ulidx": "^2.3.0",
+    "zod": "^3.23.5"
+  }
+}

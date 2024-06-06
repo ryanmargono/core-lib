@@ -1,0 +1,22 @@
+{
+  "search.exclude": {
+    "**/.sst": true
+  },
+  "files.exclude": {
+    // "**/node_modules": true,
+    "cdk.out": true,
+    // Hide all files that end in .d.ts
+    "**/*.d.ts": {
+      "when": "$(basename).ts"
+    },
+    // Hide all files that end with .js if they have a .ts file
+    // "**/*.js": { "when": "$(basename).ts" },
+    // "**/**.js": { "when": "$(basename).tsx" }
+  },
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "cSpell.words": ["deprioritize", "DEPRIORITIZED", "Lockwell", "reprioritize"],
+}
