@@ -12,8 +12,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-      - run: git config --global user.name 'AboutBits Tech'
-      - run: git config --global user.email 'tech@aboutbits.it'
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - run: git config --global user.name 'ryanmargono'
+      - run: git config --global user.email 'ryantmargono@gmail.com'
       - run: npm version patch -m "[RELEASE] %s"
       - run: git push
