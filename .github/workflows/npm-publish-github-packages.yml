@@ -4,14 +4,12 @@
 name: Node.js Package
 
 on:
-  push:
-    branches:
-      - main # or your release branch
+  release:
+    types: [created]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: "startsWith(github.event.head_commit.message, '[RELEASE]')"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
