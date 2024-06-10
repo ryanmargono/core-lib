@@ -2,15 +2,16 @@ import { ArgsType, Field, InputType, type ClassType } from 'type-graphql';
 
 @InputType()
 export class QueryOpts {
-  @Field({ nullable: true }) offsetKey?: string;
-  @Field({ defaultValue: 0 }) limit?: number = 0;
-  @Field({ defaultValue: 'createdAt' }) sortField?: string = 'createdAt';
+  // @Field({ nullable: true }) offsetKey?: string;
+  // @Field({ defaultValue: 0 }) limit?: number = 0;
+  // @Field({ defaultValue: false }) isSearch?: boolean = false;
+
   @Field({ defaultValue: 'DESC' }) sortOrder?: string = 'DESC';
-  @Field({ defaultValue: false }) isSearch?: boolean = false;
 
   @Field({ nullable: true }) gsi?: string;
-  @Field({ nullable: true }) skLowerBounds?: string;
-  @Field({ nullable: true }) skUpperBounds?: string;
+
+  @Field({ nullable: true }) skFilterOperator?: string;
+  @Field({ nullable: true }) skFilterValue?: string;
 }
 
 export class IQueryArgs<T> {

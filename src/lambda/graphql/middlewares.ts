@@ -2,14 +2,15 @@ import type { MiddlewareInterface, NextFn, ResolverData } from 'type-graphql';
 
 import type { Context } from './types';
 import { DynamoRepo } from '../repos/dynamo-repo';
+import Model from 'dynamodels';
 
 export const Guard = <
-  T extends {
+  T extends Model<T> & {
     id: string;
     objectType: string;
     createdAt: string;
     updatedAt: string;
-  },
+  }
 >(opts: {
   service: DynamoRepo<T>;
 }) => {

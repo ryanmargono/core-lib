@@ -1,7 +1,10 @@
+import type {
+  BooleanSchemaType,
+  StringSchemaType,
+} from '../../lambda/graphql/types';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import type { BooleanSchemaType, StringSchemaType } from '../../graphql/types';
 
-import type { IQueryArgs } from '../../graphql/query';
+import type { IQueryArgs } from '../../lambda/graphql/query';
 
 export const useBaseApiHooks = <T>(opts: { service: any; queryKey: string }) => {
   const queryClient = useQueryClient();

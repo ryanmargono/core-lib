@@ -1,11 +1,11 @@
-import { BooleanSchemaType, StringSchemaType } from '../../graphql/types';
+import { BooleanSchemaType, StringSchemaType } from '../../lambda/graphql/types';
 import {
   createMutationRequest,
   createQueryRequest,
   getSchemaKeys,
-} from '../../graphql/utils';
+} from '../../lambda/graphql/utils';
 
-import type { IQueryArgs } from '../../graphql/query';
+import type { IQueryArgs } from '../../lambda/graphql/query';
 import { useApiClient } from './api-client';
 
 export const useBaseApiService = <T>(opts: {
