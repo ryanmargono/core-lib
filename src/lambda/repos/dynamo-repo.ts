@@ -7,7 +7,7 @@ import { Builder } from 'builder-pattern';
 import { ulid } from 'ulidx';
 
 export class DynamoRepo<
-  T extends Model<T> & {
+  T extends {
     id: string;
     createdAt: string;
     updatedAt: string;
