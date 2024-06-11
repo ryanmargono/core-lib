@@ -1,4 +1,4 @@
-import Model, { put, type IFilterConditions } from 'dynamodels';
+import Model, { PaginationMode, put, type IFilterConditions } from 'dynamodels';
 import { IQueryArgs, QueryOpts } from '../graphql/query';
 
 import * as FilterOperations from 'dynamodels';
@@ -65,6 +65,17 @@ export class DynamoRepo<
 
     query.filter(filter as IFilterConditions);
     query.sort(queryOpts.sortOrder.toLowerCase() as 'asc' | 'desc');
+
+    // apply limiting, TODO: pagination
+    if (queryOpts.limit) {
+      query.paginate({
+        mode: PaginationMode.CONSTANT_PAGE_SIZE,
+        size: queryOpts.limit,
+      });
+
+      const res = await query.exec();
+      return res.items;
+    }
 
     return query.execAll();
   }

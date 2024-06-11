@@ -2,8 +2,8 @@ import { ArgsType, Field, InputType, type ClassType } from 'type-graphql';
 
 @InputType()
 export class QueryOpts {
-  // @Field({ nullable: true }) offsetKey?: string;
-  // @Field({ defaultValue: 0 }) limit?: number = 0;
+  @Field({ nullable: true }) paginateOffsetKey?: string;
+  @Field({ defaultValue: 0 }) limit?: number = 0;
   // @Field({ defaultValue: false }) isSearch?: boolean = false;
 
   @Field({ defaultValue: 'DESC' }) sortOrder?: string = 'DESC';
