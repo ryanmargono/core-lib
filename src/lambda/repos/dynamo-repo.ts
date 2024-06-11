@@ -9,7 +9,6 @@ import { ulid } from 'ulidx';
 export class DynamoRepo<
   T extends Model<T> & {
     id: string;
-    objectType: string;
     createdAt: string;
     updatedAt: string;
   }
@@ -27,15 +26,14 @@ export class DynamoRepo<
   ) {
     class Entity extends Model<T> {
       protected tableName = opts.tableName;
-      protected pk = 'objectType';
-      protected sk = 'id';
+      protected pk = 'id';
     }
 
     this.entity = new Entity();
   }
 
   async getOne(opts: { id: string }): Promise<T | null> {
-    return this.entity.get(this.opts.defaultValues.objectType, opts.id);
+    return this.entity.get(opts.id);
   }
 
   async query(opts: IQueryArgs<T>): Promise<T[]> {
@@ -83,7 +81,7 @@ export class DynamoRepo<
   }
 
   async update(opts: Partial<T>): Promise<T> {
-    const { id, objectType, ...updatedAttributes } = opts;
+    const { id, ...updatedAttributes } = opts;
     updatedAttributes.updatedAt = new Date().toISOString();
 
     const updated = {};
@@ -91,13 +89,13 @@ export class DynamoRepo<
       updated[prop] = put(updatedAttributes[prop]);
     }
 
-    await this.entity.update(this.opts.defaultValues.objectType, id, updated);
+    await this.entity.update(id, updated);
 
     return this.getOne({ id: opts.id!! }) as Promise<T>;
   }
 
   async delete(opts: { id: string }): Promise<boolean> {
-    await this.entity.delete(this.opts.defaultValues.objectType, opts.id);
+    await this.entity.delete(opts.id);
     return true;
   }
 }

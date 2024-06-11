@@ -7,7 +7,6 @@ import Model from 'dynamodels';
 export const Guard = <
   T extends Model<T> & {
     id: string;
-    objectType: string;
     createdAt: string;
     updatedAt: string;
   }
