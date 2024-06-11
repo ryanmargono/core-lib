@@ -1,7 +1,11 @@
 {
   "name": "@ryanmargono/core-lib",
+  "license": "MIT",
   "version": "0.3.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "sst bind vitest",
     "typecheck": "tsc -noEmit"

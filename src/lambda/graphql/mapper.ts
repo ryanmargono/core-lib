@@ -1,14 +1,13 @@
 import 'reflect-metadata';
 
-import { ArgsType, Field, InputType, ObjectType } from 'type-graphql';
+import { Field, InputType, ObjectType } from 'type-graphql';
 
-import { Model } from '@shiftcoders/dynamo-easy';
-
-export function Mapped<T extends { new (...args: any[]): {} }>(BaseClass: T) {
-  @ObjectType()
-  @InputType()
-  @Model()
-  @ArgsType()
+export function Mapped<T extends { new (...args: any[]): {} }>(
+  BaseClass: T,
+  className: string
+) {
+  @ObjectType(`${className}Object`)
+  @InputType(`${className}Input`)
   class ExtendedClass extends BaseClass {
     constructor(...args: any[]) {
       super(...args);
