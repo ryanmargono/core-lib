@@ -1,13 +1,11 @@
 import 'reflect-metadata';
 
-import { Field, InputType, ObjectType } from 'type-graphql';
+import { Field } from 'type-graphql';
 
 export function Mapped<T extends { new (...args: any[]): {} }>(
   BaseClass: T,
   className: string
 ) {
-  @ObjectType(`${className}Object`)
-  @InputType(`${className}Input`)
   class ExtendedClass extends BaseClass {
     constructor(...args: any[]) {
       super(...args);

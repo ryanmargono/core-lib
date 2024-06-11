@@ -1,6 +1,30 @@
+import { ArgsType, InputType, ObjectType } from 'type-graphql';
 import { mutation, params, query, rawString, types } from 'typed-graphqlify';
 
-import type { IQueryArgs } from './query';
+import { Partial } from 'type-graphql-utils';
+import { Mapped } from './mapper';
+import { QueryArgs, type IQueryArgs } from './query';
+
+export function getBaseGraphQlTypes<T extends { new (...args: any[]): {} }>(
+  type: T,
+  className: string
+) {
+  @ObjectType(`${className}Object`)
+  @InputType(`${className}Input`)
+  class Model extends Mapped(type, className) {}
+
+  @InputType(`Partial${className}`)
+  class PartialInput extends Partial(Model) {}
+
+  @ArgsType()
+  class Query extends QueryArgs(PartialInput) {}
+
+  return {
+    model: Model,
+    partialInput: PartialInput,
+    query: Query,
+  };
+}
 
 export const getSchemaKeys = (object: any): { [key: string]: any } => {
   const result: { [key: string]: any } = {};
