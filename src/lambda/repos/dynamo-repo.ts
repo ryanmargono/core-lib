@@ -40,23 +40,33 @@ export class DynamoRepo<
 
   async query(opts: IQueryArgs<T>): Promise<T[]> {
     const queryOpts = Builder(QueryOpts, opts.options).build();
-
     const query = this.entity.query();
 
+    // remove keys from filter
+    const filter = { ...opts.where };
     if (queryOpts.gsi) {
+      const gsiAttribute = this.opts.gsiMappings[queryOpts.gsi].attribute;
       query.index(queryOpts.gsi);
+      query.keys({
+        [gsiAttribute]: filter[gsiAttribute],
+      });
+      delete filter[gsiAttribute];
+    } else {
+      query.keys({
+        id: filter.id,
+      });
+      delete filter.id;
     }
 
-    query.sort(queryOpts.sortOrder.toLowerCase() as 'asc' | 'desc');
-
-    const filter = { ...opts.where };
+    // apply sk operation
     if (queryOpts.skFilterOperator && queryOpts.skFilterValue) {
-      filter[this.opts.gsiMappings[opts.options.gsi].attribute] = FilterOperations[
+      filter[this.opts.gsiMappings[queryOpts.gsi].attribute] = FilterOperations[
         opts.options.skFilterOperator
       ](opts.options.skFilterValue);
-    } else {
-      query.filter(filter as IFilterConditions);
     }
+
+    query.filter(filter as IFilterConditions);
+    query.sort(queryOpts.sortOrder.toLowerCase() as 'asc' | 'desc');
 
     return query.execAll();
   }
